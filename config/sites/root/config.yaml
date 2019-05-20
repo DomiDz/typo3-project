@@ -1,0 +1,44 @@
+rootPageId: 1
+base: /
+baseVariants: {  }
+languages:
+  -
+    title: Deutsch
+    enabled: true
+    languageId: '0'
+    base: /
+    typo3Language: de
+    locale: de_DE.UTF-8
+    iso-639-1: de
+    navigationTitle: Deutsch
+    hreflang: de-DE
+    direction: ltr
+    flag: global
+errorHandling:
+  -
+    errorCode: '404'
+    errorHandler: Page
+    errorContentSource: 'http://localhost:8000/404'
+routes: {  }
+routeEnhancers:
+  NewsPlugin:
+    type: Extbase
+    limitToPages:
+      - 139
+      - 133
+    extension: News
+    plugin: Pi1
+    routes:
+      - routePath: '/{news_title}'
+        _controller: 'News::detail'
+        _arguments:
+          news_title: news
+    defaultController: 'News::list'
+    defaults:
+      page: '0'
+    aspects:
+      news_title:
+        type: PersistedAliasMapper
+        tableName: tx_news_domain_model_news
+        routeFieldName: path_segment
+
